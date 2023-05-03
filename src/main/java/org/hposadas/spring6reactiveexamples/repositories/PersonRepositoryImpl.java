@@ -34,8 +34,9 @@ public class PersonRepositoryImpl implements PersonRepository {
 
     //métodos
     @Override
-    public Mono<Person> getById(Integer Id) {
-        return Mono.just(humberto);
+    public Mono<Person> getById(final Integer id) {
+        return findAll().filter(person -> person.getId() == id)
+                .next();    //next devuelve un Mono<Person> si encuentra match o un Mono.empty si no encuentra match
     }
 
     @Override
